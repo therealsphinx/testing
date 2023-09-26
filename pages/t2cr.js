@@ -1,12 +1,12 @@
 import React from 'react';
 
-const Tcr2Page = () => {
+const T2crPage = () => {
   return (
     <div>
-      <h1>Welcome to TCR2 Page</h1>
+      <h1>Welcome to T2cr Page</h1>
       {/* Add your content her */}
     </div>
   );
 };
 
-export default Tcr2Page;
+export default T2crPage;
