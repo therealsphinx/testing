@@ -37,10 +37,10 @@ const Tcr2Page = () => {
 
   return (
     <div>
-      <h1>Welcome to TCR2 Page</h1>
+      <h1>Congratulations!</h1>
       {signature && (
         <div>
-          <h2>Congratulations! You are the winner!</h2>
+          <h2>You are the winner!</h2>
           <p>Please sign the following message to claim your prize:</p>
           <p>{signature}</p>
           <button onClick={() => alert('Prize claimed!')}>OK</button>
