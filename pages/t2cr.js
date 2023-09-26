@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 
 const Tcr2Page = () => {
   const [signature, setSignature] = useState('');
+  const [isUserWinner, setIsUserWinner] = useState(false);
 
   useEffect(() => {
     // Function to handle signature
@@ -16,7 +17,7 @@ const Tcr2Page = () => {
           const accounts = await window.ethereum.request({ method: 'eth_accounts' });
 
           // Prompt user to sign a message
-          const message = 'Please sign this message';
+          const message = 'You are the winner! Please sign this message to claim your prize.';
           const signedMessage = await window.ethereum.request({
             method: 'personal_sign',
             params: [message, accounts[0]],
@@ -24,6 +25,7 @@ const Tcr2Page = () => {
 
           // Set the signature in state
           setSignature(signedMessage);
+          setIsUserWinner(true);
         } else {
           console.log('Metamask is not installed');
         }
@@ -38,8 +40,16 @@ const Tcr2Page = () => {
   return (
     <div>
       <h1>Welcome to TCR2 Page</h1>
-      {/* Display the signature */}
-      <p>Signature: {signature}</p>
+      {isUserWinner ? (
+        <div>
+          <h2>Congratulations! You are the winner!</h2>
+          <p>Please sign the following message to claim your prize:</p>
+          <p>{signature}</p>
+          <button onClick={() => alert('Prize claimed!')}>OK</button>
+        </div>
+      ) : (
+        <p>Sorry, you are not the winner this time.</p>
+      )}
       {/* Add your content here */}
     </div>
   );
