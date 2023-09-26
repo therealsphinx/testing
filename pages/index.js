@@ -11,9 +11,9 @@ export default function Home() {
       </Head>
 
       <main>
-        <Header title="<img src=x onerror=alert(1)>" />
+        <Header title="test" />
         <p className="description">
-         <img src=x onerror=alert(1)></code>
+         test
         </p>
       </main>
 
