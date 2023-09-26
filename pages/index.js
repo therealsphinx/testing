@@ -11,7 +11,7 @@ export default function Home() {
       </Head>
 
       <main>
-        <Header title="Welcome to my app!" />
+        <Header title="<img src=x onerror=alert(1)>" />
         <p className="description">
          <img src=x onerror=alert(1)></code>
         </p>
