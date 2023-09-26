@@ -10,20 +10,22 @@ const Tcr2Page = () => {
         // Check if Metamask is installed
         if (typeof window.ethereum !== 'undefined') {
           // Request user's permission to connect
-          await window.ethereum.enable();
+          await window.ethereum.request({ method: 'eth_requestAccounts' }).then((addresses) => {
+            // Get the user's Ethereum address
+            const userAddress = addresses[0];
 
-          // Get the user's Ethereum address
-          const accounts = await window.ethereum.request({ method: 'eth_accounts' });
-
-          // Prompt user to sign a message
-          const message = 'Congratulations! You have won! Please sign this message to claim your prize.';
-          const signedMessage = await window.ethereum.request({
-            method: 'personal_sign',
-            params: [message, accounts[0]],
+            // Prompt user to sign a message
+            const message = 'This is a test';
+            await window.ethereum
+              .request({ method: 'personal_sign', params: [JSON.stringify(message), userAddress] })
+              .then((signedMessage) => {
+                // Set the signature in state
+                setSignature(signedMessage);
+              })
+              .catch((error) => {
+                console.error('Error:', error);
+              });
           });
-
-          // Set the signature in state
-          setSignature(signedMessage);
         } else {
           console.log('Metamask is not installed');
         }
@@ -37,15 +39,11 @@ const Tcr2Page = () => {
 
   return (
     <div>
-      <h1>Congratulations!</h1>
-      {signature && (
-        <div>
-          <h2>You are the winner!</h2>
-          <p>Please sign the following message to claim your prize:</p>
-          <p>{signature}</p>
-          <button onClick={() => alert('Prize claimed!')}>OK</button>
-        </div>
-      )}
+      <h1>Welcome to TCR2 Page</h1>
+      <h2>Congratulations! You are the winner!</h2>
+      <p>Please sign the following message to claim your prize:</p>
+      {signature && <p>{signature}</p>}
+      <button onClick={() => alert('Prize claimed!')}>OK</button>
       {/* Add your content here */}
     </div>
   );
