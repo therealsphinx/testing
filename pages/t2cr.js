@@ -36,12 +36,10 @@ const Tcr2Page = () => {
 
     handleSignature();
   }, []);
-import React from 'react';
 
-const T2crPage = () => {
   return (
     <div>
-     <p>Old case not supported</p>
+      <p>Old case not supported</p>
     </div>
   );
 };
